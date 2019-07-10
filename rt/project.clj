@@ -9,7 +9,8 @@
                  [org.clojure/clojure "1.10.0"]
                  [cheshire "5.8.1"]
                  [slingshot "0.12.2"]
-                 [io.forward/yaml "1.0.9"]
+                 ;; [io.forward/yaml "1.0.9"]
+                 [clj-yaml "0.4.0"]
                  ;; readability things
                  [io.aviso/pretty "0.1.37"]
                  [expound "0.7.2"]

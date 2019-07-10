@@ -1,24 +1,16 @@
-# type builtins are:
-#   string (min, max)
-#   int (min, max)
-#   float (min, max)
-#   regex (pattern)
-
 # scalar types - the name is part of the prop/type
-name       : string (3 30)
-first-name : name
-last-name  : name
-email      : regex (/.*@.*\..*/gi)
-age        : int (0 200)
-occupation : regex (/chef|gardener/)
+scalars:
+  name       : string
+  first-name : name
+  last-name  : name
+  email      : [string, isEmail]
+  age        : [int, isLiving]
+  adult-age  : [age, isAdult]
 
-# you can define entities as well
-im-person:
-  fields:
+  # you can define entities as well
+entities:
+  person:
     - first-name
     - last-name
     - age
-    - occupation
-  immutable: true # Define if you'll want it mutable or not
-  setters: false
-  getters: true
+    - email
