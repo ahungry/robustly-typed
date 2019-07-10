@@ -8,6 +8,7 @@
 (defn in? [xs x]
   (some #(= x %) xs))
 
+;; TODO: parse new yml format - better than the old one I think.
 (def *scalars (atom [:string :int :float]))
 
 (defn get-scalars [] @*scalars)

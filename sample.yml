@@ -7,7 +7,7 @@ scalars:
   age        : [int, isLiving]
   adult-age  : [age, isAdult]
 
-  # you can define entities as well
+# you can define entities as well
 entities:
   person:
     - first-name
