@@ -17,6 +17,14 @@ Abstracts the data definitions from the implementation code.
 Given some YAML such as this:
 
 ```yaml
+# predicates - all are unary (single argument), or compositions of others
+fns:
+  isEmail: /.*@.*/.test(s)
+  isOverZero: x > 0
+  isUnder150: x < 150
+  isLiving: [isOverZero, isUnder150]
+  isAdult: x > 17
+
 # scalar types - the name is part of the prop/type
 scalars:
   name       : string
