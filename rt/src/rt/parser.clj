@@ -1,6 +1,7 @@
 (ns rt.parser
   (:require
    [clj-yaml.core :as yaml]
+   [clojure.core.strint :refer [<<]]
    ))
 
 (def read-file (comp yaml/parse-string slurp))
@@ -31,24 +32,27 @@
 (defn fields->typescript-class-fields [xs _ _]
   (reduce str (map #(str "    readonly " % ": " % "\n") xs)))
 
-(defn map->typescript [s {:keys [extends fields immutable setters getters]}]
-  (->
-   (format "
-export interface %s {
-%s
+(defn fields->typescript-type-fields [xs]
+  (reduce str (map (fn [_field] (<< "type ~{_field} = string\n")) xs)))
+
+(defn map->typescript [name {:keys [extends fields immutable setters getters]}]
+  (let [_type-fields (fields->typescript-type-fields fields)
+        _interface-fields (fields->typescript-interface-fields fields)
+        _class-fields (fields->typescript-class-fields fields setters getters)]
+    (->>
+     (<< "
+~{_type-fields}
+
+export interface ~{name} {
+~{_interface-fields}
 }
 
-export class %s {
-%s
+export class ~{name} {
+~{_class-fields}
 }
-"
-           s
-           (fields->typescript-interface-fields fields)
-           s
-           (fields->typescript-class-fields fields setters getters)
-           )
-   prn
-   ))
+")
+     (spit "/tmp/rt.ts")
+     )))
 
 (defn rt->lang [s m]
   (case (what s m)

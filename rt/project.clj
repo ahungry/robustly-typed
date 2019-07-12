@@ -9,6 +9,7 @@
                  [org.clojure/clojure "1.10.0"]
                  [cheshire "5.8.1"]
                  [slingshot "0.12.2"]
+                 [org.clojure/core.incubator "0.1.4"]
                  ;; [io.forward/yaml "1.0.9"]
                  [clj-yaml "0.4.0"]
                  ;; readability things
